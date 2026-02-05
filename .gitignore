@@ -1,0 +1,13 @@
+# Swap files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.suo
+*.user

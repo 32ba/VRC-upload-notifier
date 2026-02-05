@@ -1,0 +1,23 @@
+{
+    "name": "net.32ba.vrchat-upload-notifier",
+    "version": "1.0.0",
+    "displayName": "VRChat Upload Notifier",
+    "description": "Receive native OS notifications when VRChat SDK uploads complete or fail",
+    "unity": "2019.4",
+    "unityRelease": "31f1",
+    "author": {
+        "name": "32ba",
+        "url": "https://github.com/32ba"
+    },
+    "keywords": [
+        "vrchat",
+        "notification",
+        "upload",
+        "sdk"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/32ba/VRC-upload-notifier.git"
+    }
+}
