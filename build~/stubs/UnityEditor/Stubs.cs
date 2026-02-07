@@ -14,12 +14,13 @@ namespace UnityEditor
 
     public enum SettingsScope
     {
-        Project
+        User = 0,
+        Project = 1
     }
 
     public class SettingsProvider
     {
-        public SettingsProvider(string path, SettingsScope scope) { }
+        public SettingsProvider(string path, SettingsScope scopes, IEnumerable<string> keywords = null) { }
         public string label { get; set; }
         public IEnumerable<string> keywords { get; set; }
         public virtual void OnGUI(string searchContext) { }
