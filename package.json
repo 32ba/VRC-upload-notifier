@@ -1,6 +1,6 @@
 {
     "name": "net.32ba.vrchat-upload-notifier",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "displayName": "VRChat Upload Notifier",
     "description": "Receive native OS notifications when VRChat SDK uploads complete or fail",
     "unity": "2019.4",
