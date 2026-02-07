@@ -76,10 +76,6 @@ jobs:
 
       # ── Package ────────────────────────────────────────────────────
 
-      # Zip the Package for release (source distribution)
-      - name: Create Package Zip
-        run: zip -r "${{ github.workspace }}/${{ steps.set_env.outputs.zipFile }}" . -x '.*' '*/.*'
-
       - name: Prepare Unity Package Layout
         run: |
           set -euo pipefail
@@ -116,6 +112,12 @@ jobs:
           # Copy built DLL and its pre-generated .meta into the package
           cp build~/bin/Release/netstandard2.0/obfuscated/VRCUploadNotifier.Editor.dll "$PACKAGE_ROOT/Editor/"
           cp build~/VRCUploadNotifier.Editor.dll.meta                       "$PACKAGE_ROOT/Editor/"
+
+      # Zip the Package for release (from prepared layout)
+      - name: Create Package Zip
+        run: |
+          cd "Packages/${{ vars.PACKAGE_NAME }}"
+          zip -r "${{ github.workspace }}/${{ steps.set_env.outputs.zipFile }}" .
 
       # Build a list of .meta files for future use
       - name: Track Package Meta Files
