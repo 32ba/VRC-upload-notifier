@@ -1,7 +1,8 @@
 #if VRC_SDK_VRCSDK3
 using System;
 using UnityEditor;
-using VRC.SDKBase.Editor.Api;
+using VRC.SDK3A.Editor;
+using VRC.SDK3.Editor;
 using VRCUploadNotifier.Core;
 
 namespace VRCUploadNotifier.VRChatSDK
@@ -30,8 +31,18 @@ namespace VRCUploadNotifier.VRChatSDK
                 return;
             }
 
-            var avatarSubscribed = TrySubscribeAvatarBuilder();
-            var worldSubscribed = TrySubscribeWorldBuilder();
+            var avatarSubscribed = false;
+            var worldSubscribed = false;
+
+            // Each builder call is wrapped in try/catch to handle TypeLoadException
+            // when the corresponding SDK package (com.vrchat.avatars / com.vrchat.worlds)
+            // is not installed. The JIT throws TypeLoadException before the method body
+            // executes, so the inner try/catch inside each method cannot catch it.
+            try { avatarSubscribed = TrySubscribeAvatarBuilder(); }
+            catch (Exception) { /* com.vrchat.avatars not available */ }
+
+            try { worldSubscribed = TrySubscribeWorldBuilder(); }
+            catch (Exception) { /* com.vrchat.worlds not available */ }
 
             if (avatarSubscribed || worldSubscribed)
             {

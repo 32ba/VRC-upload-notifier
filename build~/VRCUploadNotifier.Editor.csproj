@@ -22,7 +22,13 @@
     <ProjectReference Include="stubs/UnityEditor/UnityEditor.csproj">
       <Private>false</Private>
     </ProjectReference>
-    <ProjectReference Include="stubs/VRCSDKBase-Editor/VRCSDKBase-Editor.csproj">
+    <ProjectReference Include="stubs/VRC.SDKBase.Editor/VRC.SDKBase.Editor.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="stubs/VRC.SDK3A.Editor/VRC.SDK3A.Editor.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="stubs/VRC.SDK3.Editor/VRC.SDK3.Editor.csproj">
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
