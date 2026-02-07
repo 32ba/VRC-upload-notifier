@@ -5,9 +5,9 @@ namespace UnityEngine
 {
     public enum RuntimePlatform
     {
-        OSXEditor,
-        WindowsEditor,
-        LinuxEditor
+        OSXEditor = 0,
+        WindowsEditor = 7,
+        LinuxEditor = 16
     }
 
     public static class Application
