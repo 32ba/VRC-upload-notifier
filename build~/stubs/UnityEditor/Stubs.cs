@@ -32,9 +32,9 @@ namespace UnityEditor
     public static class EditorGUILayout
     {
         public static void Space(float width = 0) { }
-        public static void LabelField(string label, GUIStyle style) { }
-        public static void LabelField(string label, string label2) { }
-        public static bool Toggle(GUIContent label, bool value) => value;
+        public static void LabelField(string label, GUIStyle style, params GUILayoutOption[] options) { }
+        public static void LabelField(string label, string label2, params GUILayoutOption[] options) { }
+        public static bool Toggle(GUIContent label, bool value, params GUILayoutOption[] options) => value;
         public static void HelpBox(string message, MessageType type) { }
 
         public class VerticalScope : IDisposable
