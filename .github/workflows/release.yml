@@ -59,7 +59,24 @@ jobs:
           echo "zipFile=${{ vars.PACKAGE_NAME }}-${{ steps.version.outputs.value }}".zip >> $GITHUB_OUTPUT
           echo "unityPackage=${{ vars.PACKAGE_NAME }}-${{ steps.version.outputs.value }}.unitypackage" >> $GITHUB_OUTPUT
 
-      # Zip the Package for release
+      # ── Build DLL ──────────────────────────────────────────────────
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build DLL
+        run: dotnet build build~/VRCUploadNotifier.Editor.csproj -c Release
+
+      - name: Obfuscate DLL
+        run: |
+          dotnet tool install --global Obfuscar.GlobalTool
+          obfuscar.console build~/obfuscar.xml
+
+      # ── Package ────────────────────────────────────────────────────
+
+      # Zip the Package for release (source distribution)
       - name: Create Package Zip
         run: zip -r "${{ github.workspace }}/${{ steps.set_env.outputs.zipFile }}" . -x '.*' '*/.*'
 
@@ -83,7 +100,22 @@ jobs:
             --exclude "$ZIP_FILE" \
             --exclude "$UNITYPACKAGE_FILE" \
             --exclude 'Packages/' \
+            --exclude 'build~/' \
+            --exclude '*.cs' \
+            --exclude '*.cs.meta' \
+            --exclude '*.asmdef' \
+            --exclude '*.asmdef.meta' \
             ./ "$PACKAGE_ROOT"/
+
+          # Remove empty subdirectories and their .meta files left after source exclusion
+          for dir in Core Platforms VRChatSDK; do
+            rm -rf "$PACKAGE_ROOT/Editor/$dir"
+            rm -f  "$PACKAGE_ROOT/Editor/$dir.meta"
+          done
+
+          # Copy built DLL and its pre-generated .meta into the package
+          cp build~/bin/Release/netstandard2.0/obfuscated/VRCUploadNotifier.Editor.dll "$PACKAGE_ROOT/Editor/"
+          cp build~/VRCUploadNotifier.Editor.dll.meta                       "$PACKAGE_ROOT/Editor/"
 
       # Build a list of .meta files for future use
       - name: Track Package Meta Files

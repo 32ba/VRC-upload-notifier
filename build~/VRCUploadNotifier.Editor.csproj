@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <RootNamespace>VRCUploadNotifier</RootNamespace>
+    <AssemblyName>VRCUploadNotifier.Editor</AssemblyName>
+    <DefineConstants>$(DefineConstants);VRC_SDK_VRCSDK3</DefineConstants>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <!-- Compile existing Editor sources -->
+  <ItemGroup>
+    <Compile Include="../Editor/**/*.cs" />
+  </ItemGroup>
+
+  <!-- Stub reference assemblies (compiled from stubs/ during build) -->
+  <ItemGroup>
+    <ProjectReference Include="stubs/UnityEngine/UnityEngine.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="stubs/UnityEditor/UnityEditor.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="stubs/VRCSDKBase-Editor/VRCSDKBase-Editor.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

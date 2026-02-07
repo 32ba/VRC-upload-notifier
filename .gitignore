@@ -2,6 +2,7 @@
 *.swp
 *.swo
 *~
+!build~/
 
 # OS files
 .DS_Store
@@ -11,3 +12,7 @@ Thumbs.db
 .idea/
 *.suo
 *.user
+
+# Build output (build~ directory)
+build~/**/bin/
+build~/**/obj/
