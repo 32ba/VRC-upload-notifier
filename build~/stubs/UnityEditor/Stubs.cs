@@ -79,7 +79,8 @@ namespace UnityEditor
 
     public static class EditorApplication
     {
-        public static Action delayCall;
+        public delegate void CallbackFunction();
+        public static CallbackFunction delayCall;
     }
 
     [AttributeUsage(AttributeTargets.Method)]
