@@ -69,11 +69,6 @@ jobs:
       - name: Build DLL
         run: dotnet build build~/VRCUploadNotifier.Editor.csproj -c Release
 
-      - name: Obfuscate DLL
-        run: |
-          dotnet tool install --global Obfuscar.GlobalTool
-          obfuscar.console build~/obfuscar.xml
-
       # ── Package ────────────────────────────────────────────────────
 
       - name: Prepare Unity Package Layout
@@ -110,7 +105,7 @@ jobs:
           done
 
           # Copy built DLL and its pre-generated .meta into the package
-          cp build~/bin/Release/netstandard2.0/obfuscated/VRCUploadNotifier.Editor.dll "$PACKAGE_ROOT/Editor/"
+          cp build~/bin/Release/netstandard2.0/VRCUploadNotifier.Editor.dll "$PACKAGE_ROOT/Editor/"
           cp build~/VRCUploadNotifier.Editor.dll.meta                       "$PACKAGE_ROOT/Editor/"
 
       # Zip the Package for release (from prepared layout)
